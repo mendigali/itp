@@ -25,7 +25,7 @@ int main() {
     for (int i = 0; i < 12; ++i) {
         cout << month[i] << " days in " << i + 1 << " month\n";
     }
-    // cin >> year;
-    // cout << visokosniy(year);
+    cin >> year;
+    cout << visokosniy(year);
     return 0;
 }
