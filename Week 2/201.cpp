@@ -1,8 +1,8 @@
-#include <iostream>
-using namespace std;
-int main() {
-    int num;
-    cin >> num;
-    cout << num;
-    return 0;
+#include <iostream> // add standard input/output stream library
+using namespace std; // write std:: by default
+int main() { // declare main function
+    int num; // declare integer number
+    cin >> num; // input number by user
+    cout << num; // console output number
+    return 0; // end of the main function
 }

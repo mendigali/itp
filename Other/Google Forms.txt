@@ -1,0 +1,6 @@
+Участвовал в соревнованиях по робототехнике (Arduino, VEX, Lego).
+KazRobotics 2016 (Lego) золото.
+Roboland 2018, 2019 (VEX, Arduino) оба раза бронза.
+Infomatrix Asia 2019 (VEX) серебро.
+VEX Robotics 2019 не занял место, но выиграл номинацию Judges Award.
+IITU Robocon 2019 (Arduino) не занял место.
