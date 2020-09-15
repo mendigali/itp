@@ -10,6 +10,7 @@ int main() {
     cin >> test;
     while (test--) {
         solve();
+        cout << '\n';
     }
     return 0;
 }
