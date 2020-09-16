@@ -16,12 +16,19 @@ bool isLeapYear(int year) {
     }
 }
 int main() {
-    int year, day = 1;
-    cin >> year;
-    for (int i = 1; i <= year; i++) {
-        day -= isLeapYear(i) ? 2 : 1;
-        if (day < 1) day += 7;
+    int day, month, year;
+    cin >> day >> month >> year;
+    int calendar[12] = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    calendar[1] = isLeapYear(year) ? 29 : 28;
+    day++;
+    if (day > calendar[month-1]) {
+        day = 1;
+        month++;
     }
-    cout << day;
+    if (month > 12) {
+        month = 1;
+        year++;
+    }
+    cout << day << ' ' << month << ' ' << year;
     return 0;
 }
