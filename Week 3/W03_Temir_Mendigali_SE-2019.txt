@@ -3,20 +3,569 @@ Week 03
 Problem 301:
 ===============================
 //Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    double x, y, z; // initialize 3 double variables
+    cin >> x >> y >> z; // input 3 variables
+    if (x < y && y < z) { // check if x < y < z is true
+        cout << "YES"; // if true output YES
+    } else {
+        cout << "NO"; // otherwise output NO
+    }
+    return 0; // end of the main function
+}
 
 ===============================
 Problem 302:
 ===============================
 //Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for abs
+using namespace std; // std:: by default
+int main() { // main function
+    double a, b, c; // initialize 3 double variables
+    cin >> a >> b >> c;  // input 3 variables
+    if (a <= b && b <= c) { // check if a <= b <= c is true
+        cout << a * 2 << '\n' << b * 2 << '\n' << c * 2; // if true output each number multiplied by 2
+    } else {
+        cout << abs(a) << ' ' << abs(b) << ' ' << abs(c); // otherwise ouput absolute value of each number
+    }
+    return 0; // end of the main function
+}
 
 ===============================
 Problem 303:
 ===============================
 //Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for sqrt
+using namespace std; // std:: by default
+int main() { // main function
+    double a, b, c; // initialize 3 double variables
+    cin >> a >> b >> c;  // input 3 variables
+    double d = b * b - 4 * a * c; // calculate discriminant
+    double x1 = (-b + sqrt(d)) / (2 * a); // calculate first root
+    if (d > 0) { // if discriminant is greater than zero
+        double x2 = (-b - sqrt(d)) / (2 * a); // calculate second root
+        cout << x1 << ' ' << x2 << '\n'; // output first and second roots
+    } else if (d == 0) { // if discriminant is equal to zero
+        cout << x1 << '\n'; // output first root
+    } else { // if two previous conditions were wrong then do this
+        cout << "no solution" << '\n'; // output no solution
+    }
+    return 0; // end of the main function
+}
 
 ===============================
 Problem 304:
 ===============================
 //Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <algorithm> // library for min and max
+using namespace std;  // std:: by default
+int main() { // main function
+    double x, y, z; // initialize 3 double variables
+    cin >> x >> y >> z;  // input 3 variables
+    cout << min(x, min(y, z)) << ' ' << max(x, max(y, z)); // use min and max functions to find minimum and maximum, after that output result
+    return 0; // end of the main function
+}
 
-.... so on
+===============================
+Problem 305:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    double x, y, z; // initialize 3 double variables
+    cin >> x >> y >> z;  // input 3 variables
+    // triangle can only be if 
+    // length of each side is 
+    // less than sum of 2 other sides
+    if (x < y + z && y < x + z && z < x + y) { 
+        cout << "YES"; // output YES
+    } else {
+        cout << "NO"; // output NO
+    }
+    return 0; // end of the main function
+}
+
+===============================
+Problem 306:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    int year; // initialize integer
+    cin >> year; // input number
+    if (year % 4 == 0) { // check if number does or doesn't give reminder when divided by 4. if it does give a reminder then program goes to else on 16 line
+        if (year % 100 != 0) { // if number gives reminder when divided by 100, ouput 366
+            cout << 366;
+        } else { // if doesn't give reminder, go to this statement
+            if (year % 400 == 0) { // if number doesn't give reminder when divided by 400 output 366
+                cout << 366;
+            } else { // otherwise ouput 365
+                cout << 365;
+            }
+        }
+    } else { // if statement on 6 line was false ouput 365
+        cout << 365;
+    }
+    return 0; // end of the main function
+}
+
+===============================
+Problem 307:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+// this function checks if year is leap or not
+// code is the same as 306 problem except 1 thing
+// this function return true if leap year
+// and return false if not leap year
+// for example: isLeapYear(2020) will return true
+// and isLeapYear(2019) will return false
+bool isLeapYear(int year) {
+    if (year % 4 == 0) {
+        if (year % 100 != 0) {
+            return true;
+        } else {
+            if (year % 400 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+}
+int main() { // main function
+    int day, month, year; // initialize 3 integers
+    cin >> day >> month >> year; // input 3 integers
+    // check if integers are negative or month > 12 or day > 31
+    // ouput no if at least 1 statement true
+    if (day < 1 || month < 1 || year < 1 || month > 12 || day > 31) {
+        cout << "no";
+    } else { // otherwise go here
+        // array calendar contains number of days for each month except february
+        int calendar[12] = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        // here i use function to check if this year leap or not
+        // if it is leap year then february will be 29 days
+        // if not then 28 days
+        calendar[1] = isLeapYear(year) ? 29 : 28;
+        // here we check if input day is less than or equal to number of days
+        // in this month
+        // if it is less or equal then output yes, if not output not
+        cout << (day <= calendar[month-1] ? "yes" : "no");
+    }
+    return 0;
+}
+
+===============================
+Problem 308:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+// exactly the same function
+// as in 307 problem
+bool isLeapYear(int year) {
+    if (year % 4 == 0) {
+        if (year % 100 != 0) {
+            return true;
+        } else {
+            if (year % 400 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+}
+int main() { // main function
+    int year, day = 1; // initialize 2 integer and 1 of them is equal to 1
+    cin >> year; // input number
+    // start for loop which goes from 1
+    // until input year
+    for (int i = 1; i <= year; i++) {
+        // because weekdays shift every year
+        // day variable will be decreased
+        // by 2 if leap year and by 1 if not leap year
+        day -= isLeapYear(i) ? 2 : 1;
+        // day variable shows weekday in number
+        // for example 1 monday, 2 tuesday an so on
+        // so this variable shouldn't be less than 1
+        if (day < 1) day += 7;
+    }
+    cout << day; // output day
+    return 0; // end of the main function
+}
+
+===============================
+Problem 309:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+// this is again the same function
+// as in previous problems
+bool isLeapYear(int year) {
+    if (year % 4 == 0) {
+        if (year % 100 != 0) {
+            return true;
+        } else {
+            if (year % 400 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+}
+int main() { // main function
+    int day, month, year; // initialize 3 integers
+    cin >> day >> month >> year; // input 3 numbers
+    // array calendar contains number of days for each month except february
+    int calendar[12] = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    // find number of days in february
+    calendar[1] = isLeapYear(year) ? 29 : 28;
+    day++; // increase number of days by 1
+    // if number of days is more than possible number of days in this month
+    // then reset days to 1 and increase month by 1
+    if (day > calendar[month-1]) {
+        day = 1;
+        month++;
+    }
+    // if month is more than 12
+    // reset month to 1 and increase year by 1
+    // NOTE that BOTH statements (30 and 37 lines) will be checked
+    if (month > 12) {
+        month = 1;
+        year++;
+    }
+    // output day, month, year
+    cout << day << ' ' << month << ' ' << year;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 310:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    int n, result = 1; // initialize 2 integers, 1 of them is equal to 1
+    cin >> n; // input number
+    // create loop from 1 until input number
+    for (int i = 1; i <= n; i++) {
+        // multiply result by 2
+       result *= 2;
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 311:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    int n, result = 1; // initialize 2 integers, 1 of them equal to 1
+    cin >> n; // input number
+    // loop from 1 until input number
+    for (int i = 1; i <= n; i++) {
+        // multiply result by i each time
+        result *= i;
+    }
+    // output result
+    cout << result;
+    return 0; // end of the program
+}
+
+===============================
+Problem 312:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    int n; // initialize integer
+    double result = 1; // initialize double equal to 1
+    cin >> n; // input number
+    // loop from 1 until input number
+    for (int i = 1; i <= n; i++) {
+        // multiply result by result of a given formula
+        result *= (1+1/double(i*i));
+    }
+    // output result
+    cout << result;
+    // end of the main fuction
+    return 0;
+}
+
+===============================
+Problem 314:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for sqrt
+using namespace std; // std:: by default
+int main() { // main function
+    int n; // initialize integer
+    double result = 0; // initialize double variable equal to 0
+    cin >> n; // input number
+    // loop from 0 until n not including n
+    for (int i = 0; i < n; i++) {
+        // result equal to given formula
+        result = sqrt(2 + result);
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 315:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    double a, result = 0; // initialize 2 double variables, 1 of them equal to 0
+    int n; // initialive integer
+    cin >> a >> n; // input 2 numbers
+    // loop from 1 until n including n
+    for (int i = 1; i <= n; i++) {
+        // add a to result
+        result += a;
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 316:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    double a, result; // initialize 2 double variables
+    int n; // initialize integer
+    cin >> a >> n; // input 2 numbers
+    result = a; // make result be equal to a
+    // loop from 1 until n not including n
+    for (int i = 1; i < n; i++) {
+        // multiply result by sum of a and i
+        result *= a + i;
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 317:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    int n; // initialize integer
+    double a, result = 0, denominator = 1; // initialize 3 double
+    cin >> a >> n; // input 2 numbers
+    for (int i = 0; i <= n; i++) { // loop from 0 until n including
+        denominator *= a + i; // update value of denominator
+        result += 1 / denominator; // add to result new value
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 318:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for pow
+using namespace std; // std:: by default
+int main() { // main function
+    double a, result = 0; // initialize 2 double variables
+    int n; // initialize integer
+    cin >> a >> n; // input 2 numbers
+    result = 1 / a; // make result equal to 1 divided by a
+    // loop from 2 until n times 2 including
+    // iterator will be increased by 2 each step
+    for (int i = 2; i <= n*2; i += 2) {
+        // update result
+        result += 1 / pow(a, i);
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 319:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for pow
+using namespace std; // std:: by default
+// this function calculates and returns factorial of a number
+// code is almost exact as 311 problem
+long long int factorial(int num) {
+    long long int result = 1;
+    for (int i = 2; i <= num; i++) {
+        result *= i;
+    }
+    return result;
+}
+int main() { // main function
+    double x; // initialize double variable
+    cin >> x; // input number
+    // calculate and output using given formula
+    cout << (x - (pow(x, 3)/factorial(3)) + (pow(x, 5)/factorial(5)) - (pow(x, 7)/factorial(7)) + (pow(x, 9)/factorial(9)) - (pow(x, 11)/factorial(11)) + (pow(x, 13)/factorial(13)));
+    return 0; // end of the main function
+}
+
+===============================
+Problem 320:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for pow
+using namespace std; // std:: by default
+int main() { // main function
+    int n; // initialize integer
+    double x, a; // initialive 2 double variables
+    cin >> x >> a >> n; // input 3 numbers
+    double result = x; // make result be equal to x
+    // loop from 0 until n not including
+    for (int i = 0; i < n; i++) {
+        // update result
+        result = pow(result + a, 2);
+    }
+    // output result + a
+    cout << result + a;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 321:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    // initialize 3 double varibles
+    double x, numerator = 1, denominator = 1;
+    cin >> x; // input number
+    // loop from 2 until 65 not including
+    // iterator will be multiplied by 2 each step
+    for (int i = 2; i < 65; i *= 2) {
+        // update numerator and denominator
+        numerator *= x - i;
+        denominator *= x - i + 1;
+    }
+    // output numerator divided by numerator
+    cout << numerator / denominator;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 322:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    int n = 103; // initialize integer equal to 103
+    double result = 103; // initialize double equal to 103
+    // loop that will go until n greater than 1
+    while (n > 1) {
+        // decrease n by 2
+        n -= 2;
+        // update result
+        result = (1 / result) + n;
+    }
+    // output one divided by result
+    cout << 1 / result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 323:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+using namespace std; // std:: by default
+int main() { // main function
+    double x; // initialize double variable
+    cin >> x; // input number
+    double result = x * x; // initialize result equal to x square
+    int numerator = 256; // initialize integer equal to 256
+    // loop that goes until numerator is greater or equal to 2
+    while (numerator >= 2) {
+        // update result by given formula
+        result = (numerator / result) + x * x;
+        // divide numerator by 2
+        numerator /= 2;
+    }
+    // output x divided by result
+    cout << x / result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 324:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cout
+#include <cmath> // library for pow
+using namespace std; // std:: by default
+int main() { // main function
+    double result = 0; // initialize double equal to 0
+    // loop from 1 until 50 including
+    for (int i = 1; i <= 50; i++) {
+        // update result by given formula
+        result += 1/pow(i, 3);
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
+
+===============================
+Problem 325:
+===============================
+//Code with comments goes here
+#include <iostream> // library for cin and cout
+#include <cmath> // library for pow
+using namespace std; // std:: by default
+int main() { // main function
+    double result = 0; // initialize double variable equal to 0
+    // loop from 1 until 10 including
+    for (int i = 1; i <= 10; i++) {
+        double a; // initialize double
+        cin >> a; // input number
+        result += pow(a, i); // update result
+    }
+    // output result
+    cout << result;
+    return 0; // end of the main function
+}
