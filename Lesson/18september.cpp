@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 void solve() {
-    cout << "You are free to leave";
+    
 }
 int main() {
     freopen("input.txt", "r", stdin);
