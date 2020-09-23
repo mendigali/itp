@@ -16,3 +16,19 @@ int main() { // main function
     cout << result;
     return 0; // end of the main function
 }
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() {
+    double a;
+    int n;
+    cin >> a >> n;
+    double b = 1 / a;
+    n = n * 2;
+    for (int i = 2; i <= n; i += 2) {
+        b += 1 / pow(a, i);
+    }
+    cout << b;
+    return 0;
+}
