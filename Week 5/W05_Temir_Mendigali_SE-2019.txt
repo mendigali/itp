@@ -1,0 +1,870 @@
+Week 05
+===============================
+Problem 501:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 3 integer variables
+    int n, m, mn = 999999;
+    // input 2 integers
+    cin >> n >> m;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < m; j++) {
+            // initialize integer
+            int a;
+            // input integer
+            cin >> a;
+            // compare given number with 
+            // minimum
+            if (a < mn) {
+                mn = a;
+            }
+        }
+    }
+    // output minimum
+    cout << mn;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 502:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 dimension array of integers
+    int arr[100][100];
+    // initialize 3 integer variables
+    int n, d1 = 0, d2 = 0;
+    // input number
+    cin >> n;
+    // initialize integer that will be index
+    // of the last element in array
+    int c = n - 1;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // input array element
+            cin >> arr[i][j];
+        }
+        // d1 is the sum of one diagonal
+        d1 += arr[i][i];
+        // d2 is the sum of another diagonal
+        d2 += arr[i][c];
+        // c is index of element going from 
+        // the end to the begining
+        c--;
+    }
+    // output sums of both diagonals
+    cout << d1 << ' ' << d2;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 503:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// intialize main function
+int main() {
+    // initialize 4 integers
+    int n, m, row, column;
+    // input 2 integers
+    cin >> n >> m;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < m; j++) {
+            // initialize integer variable
+            int a;
+            // input variable
+            cin >> a;
+            // if a is zero save position
+            // in row and column variables
+            if (a == 0) {
+                row = i + 1;
+                column = j + 1;
+            }
+        }
+    }
+    // output position
+    cout << row << ' ' << column;
+    // end of main function
+    return 0;
+}
+
+===============================
+Problem 504:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 4 integer varibles
+    int n, m, row = -1, column = -1;
+    // input 2 integers
+    cin >> n >> m;
+    // start loop for row
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < m; j++) {
+            // initialize integer
+            int a;
+            // input variable
+            cin >> a;
+            // if a is negative one
+            // store position in row
+            // and column variables
+            if (a == -1) {
+                row = i + 1;
+                column = j + 1;
+            }
+        }
+    }
+    // output position
+    cout << row << ' ' << column;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 505:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 dimension array
+    // of integers and integer variable
+    int arr[100][100], n;
+    // input variable
+    cin >> n;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // input array element
+            cin >> arr[i][j];
+        }
+    }
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // initialize variable            
+            int a;
+            // input variable
+            cin >> a;
+            // add given variable to
+            // previous array
+            // according to position i and j
+            arr[i][j] += a;
+        }
+    }
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // output array element and put space
+            cout << arr[i][j] << ' ';
+        }
+        // go to next line
+        cout << endl;
+    }
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 506:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 dimension array
+    int arr[100][100], n;
+    // input variable
+    cin >> n;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // input array element
+            cin >> arr[i][j];
+        }
+    }
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // compare 2 elements symmetric to each other
+            // relatively to main diagonal which goes from
+            // top left corner to bottor right corner
+            if (arr[i][j] != arr[j][i]) {
+                // if elements are not equal
+                // output NO and finish executing 
+                // of main function
+                cout << "NO";
+                return 0;
+            }
+        }
+    }
+    // if all elements were equal to each other
+    // ouput YES
+    cout << "YES";
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 507:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 integers
+    int n, ans = 0;
+    // input varible
+    cin >> n;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // initialize integer
+            int a;
+            // input varible
+            cin >> a;
+            // when j is less than i
+            // it means that element 
+            // located below main diagonal
+            if (j < i) {
+                // add element to sum
+                ans += a;
+            }
+        }
+    }
+    // output answer
+    cout << ans;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 508:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 integers
+    int n, ans = 0;
+    // input variable
+    cin >> n;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // initialize integer
+            int a;
+            // input variable
+            cin >> a;
+            // when i is less than j
+            // it means that elements if located
+            // above main diagonal
+            if (i < j) {
+                // add element to sum
+                ans += a;
+            }
+        }
+    }
+    // ouput answer
+    cout << ans;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 509:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// library for vector
+#include <vector>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 integers
+    int n, m;
+    // input 2 variables
+    cin >> n >> m;
+    // initialize vector array filled with zeros
+    // this array will hold sum of each column
+    vector<int> arr(m + 1, 0);
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < m; j++) {
+            // initialize integer
+            int a;
+            // input variable
+            cin >> a;
+            // add element to sum for
+            // the appropriate column
+            arr[j] += a;
+        }
+    }
+    // initialize 2 integers
+    int mx = -999999, pos;
+    // start loop for number of columns
+    for (int i = 0; i < m; i++) {
+        // compare sum of each column with maximum
+        // and save position of maximum element
+        if (mx < arr[i]) {
+            mx = arr[i];
+            pos = i + 1;
+        }
+    }
+    // output position of maximum column
+    cout << pos;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 510:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// library for vector, push back,
+// begin, end, size
+#include <vector>
+// library for sort
+#include <algorithm>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 integers
+    int n, m;
+    // input 2 variables
+    cin >> n >> m;
+    // initialize vector array which
+    // will store elements that are greater
+    // than zero
+    vector<int> arr;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < m; j++) {
+            // initialize integer
+            int a;
+            // input number
+            cin >> a;
+            // if given number is greater than zero
+            // then add this number to array
+            if (a > 0) {
+                arr.push_back(a);
+            }
+        }
+    }
+    // output size of an array
+    cout << arr.size() << '\n';
+    // sort array in ascending order
+    sort(arr.begin(), arr.end());
+    // start loop for each element in array
+    for (int i = 0; i < arr.size(); i++) {
+        // output array element
+        cout << arr[i] << ' ';
+    }
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 511:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize integer
+    int n;
+    // input varible
+    cin >> n;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // initialize integer which is 
+        // equal to square root of given number
+        // minus i
+        int num = n * n - i;
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // decrease and output number
+            cout << num - (j * n) << ' ';
+        }
+        // end of the line
+        cout << endl;
+    }
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 512:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 dimension array of integers
+    // and 2 integer variables
+    int n, m, arr[100][100];
+    // input 2 variables
+    cin >> n >> m;
+    // start loop for rows
+    for (int i = 0; i < n; i++) {
+        // start loop for columns
+        for (int j = 0; j < m; j++) {
+            // input array element
+            cin >> arr[i][j];
+        }
+    }
+    // start loop in reverse direction
+    for (int i = m - 1; i >= 0; i--) {
+        // start loop for columns
+        for (int j = 0; j < n; j++) {
+            // ouput array element
+            cout << arr[j][i] << ' ';
+        }
+        // end of the line
+        cout << endl;
+    }
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 513:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// library for strcmp
+#include <cstring>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize char array on 5 records
+    // each consist of 2 elements 
+    // and fill it with given information
+    char arr[5][10][10] = {
+        {"Tom", "555-3322"},
+        {"Mary", "555-8976"},
+        {"Jon", "555-1037"},
+        {"Rachel", "555-1400"},
+        {"Sherry", "555-8873"}
+    };
+    // initialize char array
+    char name[10];
+    // input name
+    cin >> name;
+    // start loop for each element in char array
+    for (int i = 0; i < 5; i++) {
+        // compare given name with each name in 
+        // array and output number if name is found
+        if (strcmp(name, arr[i][0]) == 0) {
+            cout << arr[i][1];
+            // stop executing main function if name was found
+            return 0;
+        }
+    }
+    // output not found if name 
+    // was not found
+    cout << "Not found";
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 514:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize 2 dimension array filled with zeros
+int arr[35][35];
+// initialize main function
+int main() {
+    // initialize integer variable
+    int n;
+    // input variable
+    cin >> n;
+    // make firts element equal 1
+    arr[0][0] = 1;
+    // start loop for rows
+    for (int i = 1; i <= n; i++) {
+        // start loop for columns
+        for (int j = 1; j <= i; j++) {
+            // make an element equal to sum 
+            // of two elements above and left
+            arr[i][j] = arr[i-1][j-1] + arr[i-1][j];
+            // output array element
+            cout << arr[i][j] << ' ';
+        }
+        // end of the line
+        cout << endl;
+    }
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 515:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize array of boolean filled with zeros
+// this array will store dead and alive people
+// false is alive
+// true is dead
+bool people[500];
+// initialize main function
+int main() {
+    // initialize 2 integer variables
+    int n, k;
+    // input 2 variables
+    cin >> n >> k;
+    // alive - number of people who are alive
+    // cnt - it will be counter to kill
+    int alive = n, cnt = 0;
+    // start loop until alive is greater than 1
+    while (alive > 1) {
+        // start loop for each people
+        for (int i = 1; i <= n; i++) {
+            // if people is false, it means
+            // that he is alive
+            // and we will increase counter
+            if (people[i] == false) {
+                cnt++;
+                // when counter gets equal to k
+                // kill one person
+                if (cnt == k) {
+                    people[i] = true;
+                    // refresh counter
+                    cnt = 0;
+                    // and decrease number of alive
+                    alive--;
+                    // when it will be only 1 alive person
+                    // finish loop
+                    if (alive == 1) {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    // start loop for each people
+    for (int i = 1; i <= n; i++) {
+        // find last last alive person 
+        // and output his index
+        if (people[i] == false) {
+            cout << i;
+            return 0;
+        }
+    }
+}
+
+===============================
+Problem 516:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 integer variables
+    int n, m;
+    // input 2 variables
+    cin >> n >> m;
+    // start loop for rows
+    for (int i = 1; i <= n; i++) {
+        // each odd line contains elements in ascending order
+        // while each even line contains elements in descending order
+        // so i made 2 different loop for odd and even lines
+        if (i % 2 == 0) {
+            for (int j = m * i - 1; j >= m * (i - 1); j--) {
+                cout << j << ' ';
+            }
+        } else {
+            for (int j = m * (i - 1); j <= m * i - 1; j++) {
+                cout << j << ' ';
+            }
+        }
+        // end of line
+        cout << endl;
+    }
+    return 0;
+}
+
+===============================
+Problem 517:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// library for max
+#include <algorithm>
+// std::
+using namespace std;
+// initialize main function
+int main() {
+    // initialize 2 dimension array
+    // and 2 integer variables
+    int arr[10][10], mx = 0, length = 0;
+    // start loop for rows
+    for (int i = 0; i < 10; i++) {
+        // start loop for columns
+        for (int j = 0; j < 10; j++) {
+            // input array element
+            cin >> arr[i][j];
+            // here I count length of zeros until I get 1
+            // when it is zero, I refresh length and compare
+            // current length with maximum lenght
+            if (arr[i][j] == 0) {
+                length++;
+            } else {
+                mx = max(mx, length);
+                length = 0;
+            }
+        }
+        // when the line ends I also refresh length 
+        // and compare it to maximum length
+        // 
+        // I do it because I counted length only 
+        // horizontally inside 1 line
+        mx = max(mx, length);
+        length = 0;
+    }
+    // in this loop I will count length vertically
+    // inside each column
+    // 
+    // counting principle is the same as when
+    // counting horizontally
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (arr[j][i] == 0) {
+                length++;
+            } else {
+                mx = max(mx, length);
+                length = 0;
+            }
+        }
+        mx = max(mx, length);
+        length = 0;
+    }
+    // output maximum
+    cout << mx;
+    return 0;
+}
+
+===============================
+Problem 518:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize 2 dimension array of integers
+int arr[15][15];
+// initialize 2 dimension array of boolean
+// this array will store changes of the first 
+// array during current event
+bool arr2[15][15];
+// this function gets position of a cell
+// and returns number of neighbors
+int countNeighbors(int x, int y) {
+    int neighbors = 0;
+    // in order to count neighbors we need to count
+    // each cell withing range of 1 cell
+    for (int i = x-1; i <= x+1; i++) {
+        for (int j = y-1; j <= y+1; j++) {
+            neighbors += arr[i][j];
+        }
+    }
+    // do not count given cell as a neighbor
+    if (arr[x][y]) neighbors--;
+    return neighbors;
+}
+int main() {
+    // initialize 2 integers
+    int n, t;
+    // input 2 variables
+    cin >> n >> t;
+    // start loop for rows
+    for (int i = 1; i <= n; i++) {
+        // start loop for columns
+        for (int j = 1; j <= n; j++) {
+            // input array element
+            cin >> arr[i][j];
+            // make boolean array on the same position
+            // equal to the integer array
+            arr2[i][j] = arr[i][j];
+        }
+    }
+    // start loop for given amount of "seconds"
+    while (t--) {
+        // start loop for rows
+        for (int i = 1; i <= n; i++) {
+            // start loop for columns
+            for (int j = 1; j <= n; j++) {
+                // initialize integer that will 
+                // hold number of neighbors for current cell
+                int n = countNeighbors(i, j);
+                // check given conditions
+                // if current cell is 1 and number of neighbors
+                // is less than 2 or more than 3, change cell
+                // from one to zero
+                if (arr[i][j] == 1 && (n < 2 || n > 3)) {
+                    arr2[i][j] = false;
+                }
+                // check another condition
+                // if current cell is 0 and number of neighbors
+                // is exactly 3, change cell from zero to one
+                if (arr[i][j] == 0 && n == 3) {
+                    arr2[i][j] = true;
+                }
+            }
+        }
+        // arr - is actual array
+        // arr2 - temporary array, that stores 
+        // changes of arr for current event
+        //
+        // transfer changes from arr2 to arr
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                arr[i][j] = arr2[i][j];
+            }
+        }
+    }
+    // output the final array after all changes
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << arr[i][j] << ' ';
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+===============================
+Problem 519:
+===============================
+//Code with comments goes here
+// library for cin and cout
+#include <iostream>
+// std::
+using namespace std;
+// initialize 2 dimension array of integers filled with 0
+int arr[55][55];
+// initialize main function
+int main() {
+    // initialize integer
+    int n;
+    // input variable
+    cin >> n;
+    // l - left side limit
+    // r - right side limit
+    int l = 1;
+    int r = n;
+    // start loop until left side limit is less than right side
+    while (l < r) {
+        // this loop makes square shape of 1
+        // it look like this
+        // 1111111
+        // 1000001
+        // 1011101
+        // 1010101
+        // 1011101
+        // 1000001
+        // 1111111
+        for (int i = l; i <= r; i++) {
+            arr[l][i] = 1;
+            arr[r][i] = 1;
+            arr[i][l] = 1;
+            arr[i][r] = 1;
+        }
+        // here I change top left corner of current square
+        // to make it look spiral
+        // 1111111
+        // 0000001
+        // 1111101
+        // 1000101
+        // 1011101
+        // 1000001
+        // 1111111
+        arr[l][l-1] = 1;
+        arr[l+1][l] = 0;
+        l += 2;
+        r -= 2;
+    }
+    // print spiral
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << arr[i][j];
+        }
+        cout << endl;
+    }
+    return 0;
+}
