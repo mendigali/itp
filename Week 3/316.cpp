@@ -14,17 +14,3 @@ int main() { // main function
     cout << result;
     return 0; // end of the main function
 }
-
-#include <iostream>
-using namespace std;
-int main() {
-    double a;
-    int n;
-    cin >> a >> n;
-    double b = a;
-    for (int i = 1; i < n; i++) {
-        b *= a + i;
-    }
-    cout << b;
-    return 0;
-}
