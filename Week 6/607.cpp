@@ -1,34 +1,34 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
-int main (){
-    int N,M,a=0;
-    int B[100];
-    cin >> N >> M;
-    int A[100][100];
-    for (int i=0; i<N; i++){
-        for (int j=0; j<M;j++){
-            cin >> A[i][j];
-        }
+int countPositives(int m) {
+    int result = 0;
+    for (int i = 0; i < m; i++) {
+        int a;
+        cin >> a;
+        if (a > 0) result++;
     }
-    for (int i=0; i<N; i++){
-      for (int j=0; j<M; j++){
-        if (A[i][j]>0){
-        B[a]=A[i][j];
-        a++;
+    return result;
+}
+int main () {
+    int n, m, mx = 0, row = 1, duplicate = 1;
+    cin >> n >> m;
+    int i = 1;
+    while (i <= n) {
+        int positives = countPositives(m);
+        if (positives == mx) {
+            duplicate++;
         }
-      }
-    }
-    cout << a << endl;
-    for (int i=0; i<a-1; i++) {
-        for (int j=0; j<a-1;j++) {
-            if (B[j] > B[j+1]){
-                swap(B[j], B[j+1]);  
-            }
+        if (positives > mx) {
+            mx = positives;
+            row = i;
         }
+        i++;
     }
-    for (int i=0; i<a; i++) {
-        cout << B[i] << ' ';
+    if (duplicate == n) {
+        cout << "Numbers are equal";
+    }
+    else {
+        cout << row;
     }
     return 0;
 }
