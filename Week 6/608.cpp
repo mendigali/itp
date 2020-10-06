@@ -1,7 +1,8 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-int findSequenceLength(int m, int mx = 0, int length = 1, int prev = 0, int cur = 0) {
+int findSequenceLength(int m) {
+    int mx = 0, length = 1, prev = 0, cur = 0;
     for (int i = 0; i < m; i++) {
         prev = cur;
         cin >> cur;
