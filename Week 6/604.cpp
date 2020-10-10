@@ -9,7 +9,8 @@ int main() {
     // initialize and input 3 bool variables
     bool x, y, z;
     cin >> x >> y >> z;
-    // call function that makes
+    // call function that makes returns
+    // most common among 3 variables
     cout << election(x, y, z);
     return 0;
 }
