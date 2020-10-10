@@ -1,0 +1,106 @@
+Week 06
+===============================
+Problem 601:
+===============================
+//Code with comments goes here
+#include <iostream>
+using namespace std;
+// initialize a function which takes
+// 4 integer numbers and returns
+// 1 integer number that is minimum
+// by using if else statements
+int min(int a, int b, int c, int d) {
+    if (a <= b && a <= c && a <= d) return a;
+    else if (b <= a && b <= c && b <= d) return b;
+    else if (c <= a && c <= b && c <= d) return c;
+    else return d;
+}
+int main() {
+    // initialize and input 4 integer numbers
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    // call a function which return minimum
+    // out of 4 number
+    cout << min(a, b, c, d);
+    return 0;
+}
+
+===============================
+Problem 602:
+===============================
+//Code with comments goes here
+#include <iostream>
+using namespace std;
+// initialize a function which takes
+// 2 numbers and returns 1 number which
+// is the result of taking first 
+// number to the power of second number
+// by using for loop
+double power(double a, int n) {
+    double result = 1;
+    for (int i = 1; i <= n; i++)
+        result *= a;
+    return result;
+}
+int main() {
+    // initialize and input 
+    // 1 double and 1 integer
+    // numbers
+    double a;
+    int n;
+    cin >> a >> n;
+    // call a function which takes
+    // first number and gets it 
+    // to the power of second number
+    cout << power(a, n);
+    return 0;
+}
+
+===============================
+Problem 603:
+===============================
+//Code with comments goes here
+#include <iostream>
+using namespace std;
+// initialize function that
+// takes 2 bool variables 
+// and outputs xor of this 
+// variables
+bool myXor (bool x, bool y) {
+    return x ^ y;
+}
+int main() {
+    // initialize and input 2 bool variables
+    bool x, y;
+    cin >> x >> y;
+    // call function that takes 2 bool 
+    // variables and xor them
+    cout << myXor(x, y);
+    return 0;
+}
+
+===============================
+Problem 604:
+===============================
+//Code with comments goes here
+#include <iostream>
+using namespace std;
+// initialize function that takes 3 bool 
+// variables and returns most common among them
+bool election(bool x, bool y, bool z) {
+    return (x + y + z) / 2;
+}
+int main() {
+    // initialize and input 3 bool variables
+    bool x, y, z;
+    cin >> x >> y >> z;
+    // call function that makes
+    cout << election(x, y, z);
+    return 0;
+}
+
+===============================
+Problem 605:
+===============================
+//Code with comments goes here
+

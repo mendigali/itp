@@ -25,10 +25,7 @@ int main() {
     int n;
     char str[1000];
     cin >> n >> str;
-    if (!validate(str, n)) {
-        cout << "NO";
-    } else {
-        cout << "YES";
-    }
+    cout << (validate(str, n) ? "YES" : "NO");
     return 0;
 }
+
