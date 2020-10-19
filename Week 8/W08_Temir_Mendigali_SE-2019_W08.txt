@@ -1,0 +1,650 @@
+Week 8
+===============================
+Problem 801:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/* 
+ * this function swaps 2 elements by using xor
+ * for example we have 2 numbers
+ * a = 5 which in binary will be 0101
+ * b = 13 which in binary will be 1101
+ */
+void swap2(unsigned int *a, unsigned int *b) {
+    *a = *a ^ *b; // a = 0101 xor 1101 = 1000
+    *b = *a ^ *b; // b = 1000 xor 1101 = 0101
+    *a = *a ^ *b; // a = 1000 xor 0101 = 1101
+    /* 
+     * so after running this function we have
+     * a = 1101 and b = 0101
+     */
+}
+// initialize main function
+int main() {
+    unsigned int a, b;
+    cin >> a >> b;
+    swap2(&a, &b);
+    cout << a << ' ' << b;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 802:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/*
+ * read and store array in memory
+ * locations between 2 pointers
+ */
+void read(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        cin >> *i;
+}
+/*
+ * write array which is stored
+ * between 2 pointers
+ */
+void write(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        cout << *i << ' ';
+}
+// initialize main function
+int main() {
+    int n;
+    // enter array size
+    cin >> n;
+    // create array with dynamic memory size
+    int *arr = new int[n];
+    read(arr, arr+n);
+    write(arr, arr+n);
+    // delete array from memory
+    delete[] arr;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 803:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+// this function count how many times
+// letter appears in char array
+int countLetter(char c, char *arr) {
+    int result = 0;
+    for (int i = 0; i < 20; i++)
+        if (*(arr + i) == c)
+            result++;
+    return result;
+}
+// initialize main function
+int main() {
+    char c[100], arr[100][20];
+    int n;
+    // enter number of inputs
+    cin >> n;
+    // read each letter and char array
+    for (int i = 0; i < n; i++) {
+        cin >> c[i];
+        cin >> arr[i];
+    }
+    /* 
+     * make loop for each array element and
+     * each time call function which counts
+     * how many times letter appeared in char array
+     */
+    for (int i = 0; i < n; i++)
+        cout << countLetter(c[i], &arr[i][0]) << ' ' << c[i] << " in " << arr[i] << endl;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 804:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for min, max, sort
+#include <algorithm>
+// library for isalpha, tolower, toupper
+#include <cctype>
+// write std:: by default
+using namespace std;
+/*
+ * this function filters non letter characters
+ * and returns filtered array
+ */
+char *filter(char *word) {
+    static char new_word[100];
+    for (int i = 0; i < 100; i++)
+        new_word[i] = isalpha(*(word + i)) ? *(word + i) : '#';
+    return new_word;
+}
+// initialize main function
+int main() {
+    char word[100];
+    // by default array will be filled with 
+    // hash signs
+    fill(word, word+100, '#');
+    cin >> word;
+    char *filtered_word = filter(word);
+    // print filtered word
+    for (int i = 0; i < 100; i++)
+        if (*(filtered_word + i) != '#')
+            cout << *(filtered_word + i);
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 806:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/*
+ * read and store array in memory
+ * locations between 2 pointers
+ */
+void read(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        cin >> *i;
+}
+/*
+ * this function prints only
+ * odd elements of array
+ */
+void printOdd(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        if (*i % 2 == 1)
+            cout << *i << ' ';
+}
+/*
+ * this function prints only
+ * even elements of array
+ */
+void printEven(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        if (*i % 2 == 0)
+            cout << *i << ' ';
+}
+// initialize main function
+int main() {
+    int n;
+    // enter array size
+    cin >> n;
+    // create array with dynamic memory size
+    int *arr = new int[n];
+    read(arr, arr+n);
+    printOdd(arr, arr+n);
+    printEven(arr, arr+n);
+    // delete array from memory
+    delete[] arr;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 807:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/*
+ * read and store array in memory
+ * locations between 2 pointers
+ */
+void read(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        cin >> *i;
+}
+/*
+ * this function finds and returns
+ * sum of elements between zeros
+ */
+int sum(int *l, int *r) {
+    int sum = 0, zero = 0;
+    for (int *i = l; i < r; i++) {
+        zero += (*i == 0);
+        if (zero > 0 && zero < 2)
+            sum += *i;
+    }
+    return sum;
+}
+// initialize main function
+int main() {
+    int n;
+    // enter array size
+    cin >> n;
+    // create array with dynamic memory size
+    int *arr = new int[n];
+    read(arr, arr+n);
+    cout << sum(arr, arr+n);
+    // delete array from memory
+    delete[] arr;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 808:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/*
+ * read and store array in memory
+ * locations between 2 pointers
+ */
+void read(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        cin >> *i;
+}
+/*
+ * this function finds and
+ * returns position of
+ * maximum element in array
+ */
+int *maxPosition(int *l, int *r) {
+    int mx = -999, *pos;
+    for (int *i = l; i < r; i++)
+        if (*i >= mx) {
+            pos = i;
+            mx = *i;
+        }
+    return pos;
+}
+/*
+ * this function calculates
+ * sum of positive elements
+ * before maximum element
+ */
+int positiveSum(int *l, int *r) {
+    int sum = 0;
+    for (int *i = l; i < r; i++)
+        if (*i > 0)
+            sum += *i;
+    return sum;
+}
+// initialize main function
+int main() {
+    int n;
+    // enter array size
+    cin >> n;
+    // create array with dynamic memory size
+    int *arr = new int[n];
+    read(arr, arr+n);
+    int *maxPos = maxPosition(arr, arr+n);
+    cout << positiveSum(arr, maxPos);
+    // delete array and maxPos from memory
+    delete[] arr;
+    delete maxPos;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 809:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/*
+ * read and store array in memory
+ * locations between 2 pointers
+ */
+void read(int *l, int *r) {
+    for (int *i = l; i < r; i++)
+        cin >> *i;
+}
+/*
+ * this function finds and
+ * returns position of
+ * minimum element in array
+ */
+int *minPosition(int *l, int *r) {
+    int *pos, mn = 999;
+    for (int *i = l; i < r; i++)
+        if (*i < mn) {
+            mn = *i;
+            pos = i;
+        }
+    return pos;
+}
+/*
+ * this function finds and
+ * returns position of
+ * maximum element in array
+ */
+int *maxPosition(int *l, int *r) {
+    int *pos, mx = -999;
+    for (int *i = l; i < r; i++)
+        if (*i > mx) {
+            mx = *i;
+            pos = i;
+        }
+    return pos;
+}
+/*
+ * this function counts and
+ * returns number of even
+ * elements between min and max
+ */
+int countEven(int *l, int *r) {
+    int c = 0;
+    for (int *i = l+1; i < r; i++)
+        if (*i % 2 == 0)
+            c++;
+    return c;
+}
+// initialize main function
+int main() {
+    int n;
+    // enter array size
+    cin >> n;
+    // create array with dynamic memory size
+    int *arr = new int[n];
+    read(arr, arr+n);
+    int *minPos = minPosition(arr, arr+n);
+    int *maxPos = maxPosition(arr, arr+n);
+    cout << countEven(minPos, maxPos);
+    // delete array and maxPos from memory
+    delete[] arr;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 810:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+/*
+ * this function compares 
+ * 2 words and return true
+ * if they are equal to each other
+ */
+bool compare(char *s1, int size1, char *s2, int size2) {
+    if (size1 != size2)
+        return false;
+    for (int i = 0; i < size1; i++)
+        if (*(s1 + i) != *(s2 + i))
+            return false;
+    return true;
+}
+// initialize main function
+int main() {
+    char word[2][100];
+    // enter 2 words
+    cin >> word[0];
+    cin >> word[1];
+    cout << (compare(&word[0][0], strlen(word[0]), &word[1][0], strlen(word[1])) ? "YES" : "NO");
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 811:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for string objects
+#include <string>
+// write std:: by default
+using namespace std;
+/*
+ * this function checks if 
+ * the given word is palindrom or not
+ */
+string palindrom(char *word, int size) {
+    for (int i = 0; i < size; i++)
+        if (*(word + i) != *(word + size - i - 1))
+            return "NO";
+    return "YES";
+}
+// initialize main function
+int main() {
+    string word;
+    // enter word
+    getline(cin, word);
+    cout << palindrom(&word[0], word.length());
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 812:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for string objects
+#include <string>
+// write std:: by default
+using namespace std;
+/*
+ * this function makes plain text
+ * using cypher and number of positions
+ */
+void decrypt(char *word, int size, int k) {
+    for (int i = 0; i < size; i++) {
+        if (*(word+i)-65 < k)
+            *(word+i) += 26;  
+        *(word+i) -= k;
+    }
+}
+// initialize main function
+int main() {
+    string cypher;
+    int k;
+    // enter cypher and number of positions
+    cin >> cypher;
+    cin >> k;
+    /* 
+     * number of positions should be < 26
+     * because result will be the same
+     * if we enter any number > 26 or 
+     * if we enter the same number-26
+     * 
+     * example is 30 and 4
+     */
+    k %= 26;
+    decrypt(&cypher[0], cypher.length(), k);
+    cout << cypher;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 813:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for string objects
+#include <string>
+// library for stringstream
+#include <sstream>
+// write std:: by default
+using namespace std;
+bool validateIP(char *ip, int size) {
+    string num = "";
+    int arr[4], c = 0;
+    for (int i = 0; i < size; i++) {
+        if (*(ip + i) != '.')
+            num += *(ip + i);
+        else {
+            stringstream cur_num(num);
+	        cur_num >> arr[c];
+            c++;
+            num = "";
+        }
+    }
+    stringstream cur_num(num);
+	cur_num >> arr[3];
+    for (int i = 0; i < 4; i++)
+        if (arr[i] < 0 || arr[i] > 255)
+            return false;
+    return true;
+}
+// initialize main function
+int main() {
+    string ip;
+    cin >> ip;
+    cout << validateIP(&ip[0], ip.length());
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 814:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for string objects
+#include <string>
+// library for stringstream
+#include <sstream>
+// write std:: by default
+using namespace std;
+/*
+ * this function returns number of 
+ * steps to direction
+ */
+int findRange(char *s, int size) {
+    string number = "";
+    int answer;
+    bool f = false;
+    for (int i = 0; i < size; i++) {
+        if (*(s + i) == ' ') {
+            f = true;
+        }
+        if (f) {
+            number += *(s + i);
+        }
+    }
+    stringstream num(number);
+	num >> answer;
+    return answer;
+}
+// initialize main function
+int main() {
+    int x = 0, y = 0;
+    string str;
+    while (getline(cin, str)) {
+        int range = findRange(&str[0], str.length());
+        // add number of steps to coordinate
+        // according to direction
+        switch (str[0]) {
+            case 'N':
+                y += range;
+                break;
+            case 'S':
+                y -= range;
+                break;
+            case 'E':
+                x += range;
+                break;
+            case 'W':
+                x -= range;
+                break;
+        }
+    }
+    cout << x << ' ' << y;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 815:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/*
+ * this function calculates sum
+ * of digits for given number
+ */
+int addDigits(int num) {
+    int sum = 0;
+    while (num > 0) {
+        sum += (num % 10);
+        num /= 10;
+    }
+    return sum;
+}
+/*
+ * this function finds amount of numbers
+ * where sum of digits is equal to given number num
+ * on a specific range from l until r
+ * 
+ * example countCombinations(13, 1000, 8000) will 
+ * return how many numbers between 1000 and 8000
+ * have sum of digits equal to 13
+ */
+int countCombinations(int *num, int l, int r) {
+    int cnt = 0;
+    for (int i = l; i <= r; i++)
+        if (addDigits(i) == *num)
+            cnt++;
+    return cnt;
+}
+int possibleSum[37], answer;
+// initialize main function
+int main() {
+    int M, N;
+    // enter first and last tickets
+    cin >> M >> N;
+    // divide first ticket into left and right sides
+    int ML = M / 10000, MR = M % 10000;
+    // divide last ticket into left and right sides
+    int NL = N / 10000, NR = N % 10000;
+    // find sum of digits of left sides of both first and last numbers
+    int sumOfDigitsML = addDigits(ML), sumOfDigitsNL = addDigits(NL);
+    // check if left side of first ticket is equal to 
+    // left side of last ticket
+    if (ML == NL) {
+        cout << countCombinations(&sumOfDigitsML, MR, NR);
+        return 0;
+    }
+    // calculate amount of lucky tickets where left side
+    // is equal to left side of numbers M and N
+    answer += countCombinations(&sumOfDigitsML, MR, 9999);
+    answer += countCombinations(&sumOfDigitsNL, 1, NR);
+    // exclude tickets where we have already calculated 
+    // number of lucky tickets
+    ML++;
+    NL--;
+    // find possible sum of left digits
+    for (int i = ML; i <= NL; i++)
+        possibleSum[addDigits(i)]++;
+    for (int i = 1; i <= 36; i++)
+        /* 
+         * if number i can be the sum of left side
+         * then calculate amount of numbers which 
+         * give i from rigth side
+         */
+        if (possibleSum[i] > 0) {
+            int combinations = countCombinations(&i, 1, 9999);
+            answer += combinations * possibleSum[i];
+        }
+    cout << answer;
+    // end of the main function
+    return 0;
+}
+

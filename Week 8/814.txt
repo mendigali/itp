@@ -2,13 +2,33 @@
 #include <string>
 #include <sstream>
 using namespace std;
+/*
+ * this function returns number of 
+ * steps to direction
+ */
+int findRange(char *s, int size) {
+    string number = "";
+    int answer;
+    bool f = false;
+    for (int i = 0; i < size; i++) {
+        if (*(s + i) == ' ') {
+            f = true;
+        }
+        if (f) {
+            number += *(s + i);
+        }
+    }
+    stringstream num(number);
+	num >> answer;
+    return answer;
+}
 int main() {
     int x = 0, y = 0;
     string str;
     while (getline(cin, str)) {
-        stringstream num(str.substr(str.find(' ') + 1));
-        int range;
-	    num >> range;
+        int range = findRange(&str[0], str.length());
+        // add number of steps to coordinate
+        // according to direction
         switch (str[0]) {
             case 'N':
                 y += range;

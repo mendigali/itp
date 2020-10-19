@@ -2,13 +2,13 @@
 #include <string>
 #include <sstream>
 using namespace std;
-bool validateIP(string ip) {
+bool validateIP(char *ip, int size) {
     string num = "";
     int arr[4], c = 0;
-    for (int i = 0; i < ip.length(); i++) {
-        if (ip[i] != '.') {
-            num += ip[i];
-        } else {
+    for (int i = 0; i < size; i++) {
+        if (*(ip + i) != '.')
+            num += *(ip + i);
+        else {
             stringstream cur_num(num);
 	        cur_num >> arr[c];
             c++;
@@ -25,6 +25,6 @@ bool validateIP(string ip) {
 int main() {
     string ip;
     cin >> ip;
-    cout << validateIP(ip);
+    cout << validateIP(&ip[0], ip.length());
     return 0;
 }
