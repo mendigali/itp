@@ -1,7 +1,9 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
+// maximum length of input
 const int MAX_N = 1e3 + 1;
+// exactly the same function as in 904
 bool equalWords(char *s1, char *s2) {
     int i = 0;
     while (*(s1 + i) != '\0')
@@ -18,6 +20,7 @@ bool equalWords(char *s1, char *s2) {
             return false;
     return true;
 }
+// also exactly the same as in 904
 int exists(char *arr[], char *word, int size) {
     for (int i = 0; i < size; i++)
         if (equalWords(arr[i], word))
@@ -25,10 +28,14 @@ int exists(char *arr[], char *word, int size) {
     return -1;
 }
 void deleteDuplicates(char *text) {
+    // arr - stores all distinct words
     char *arr[MAX_N], delim[] = " ";
+    // token - current word
     char *token = strtok(text, delim);
     int i = 0;
     while (token) {
+        // if current word doesn't exist\
+        insert it into array
         if (exists(arr, token, i) == -1) {
             arr[i] = token;
             i++;
@@ -36,6 +43,7 @@ void deleteDuplicates(char *text) {
         token = strtok(NULL, delim);
     }
     int n = i;
+    // print all words from array
     for (i = 0; i < n; i++)
         cout << arr[i] << ' ';
 }

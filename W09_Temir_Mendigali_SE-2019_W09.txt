@@ -1,0 +1,802 @@
+Week 9
+===============================
+Problem 901:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+/**
+ * this function takes 2 parameters
+ * pointer to the begining of char array
+ * and length of that array
+ * 
+ * then it will look for substring AITU
+ * and return true if finds it or return
+ * false if doesn't find
+ */
+bool findSubstring(char *str, int size) {
+    /**
+     * AITU is 4 letters
+     * so if input is less then 4 letters
+     * return false
+     */
+    if (size < 4)
+        return false;
+    int i = 3;
+    while (i < size) {
+        /**
+         * if we find letter U then we will
+         * check 3 previous letters
+         */
+        if (toupper(*(str + i)) == 'U') {
+            char A = toupper(*(str + i - 3)),
+                 I = toupper(*(str + i - 2)),
+                 T = toupper(*(str + i - 1));
+            if (A == 'A' && I == 'I' && T == 'T')
+                return true;
+        }
+        i++;
+    }
+    return false;
+}
+// initialize main function
+int main() {
+    /**
+     * initialize char array
+     * which will store input
+     */
+    char line[MAX_N];
+    /**
+     * input line
+     */
+    cin.getline(line, MAX_N);
+    /**
+     * call function and print YES or NO using ternary operator
+     */
+    cout << (findSubstring(line, strlen(line)) ? "YES" : "NO");
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 902:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+/**
+ * this function gets 2 parameters
+ * pointers to char arrays with given text
+ * and with answer
+ */
+void replace(char *source, char *dest) {
+    int i = 0;
+    while (*(source + i) != '\0') {
+        /**
+         * if current symbol is ! then change it to .
+         */
+        if (*(source + i) == '!')
+            *(source + i) = '.';
+        *(dest + i) = *(source + i);
+        i++;
+    }
+}
+// initialize main function
+int main() {
+    /**
+     * initialize 2 char arrays
+     * and input one of them
+     */
+    char line[MAX_N], answer[MAX_N];
+    cin.getline(line, MAX_N);
+    replace(&line[0], &answer[0]);
+    /**
+     * output result after calling function
+     */
+    cout << answer;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 903:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e2 + 1;
+/**
+ * this function gets 2 parameters
+ * pointer to first element of char array
+ * and length of that array
+ */
+void format(char *num, int size) {
+    int i = 0, cnt = 0;
+    /**
+     * if length of number gives reminder 1
+     * when divided by 3, then print first digit
+     * of that number and put space
+     * then make i equal 1 to skip this digit later
+     */
+    if (size % 3 == 1) {
+        cout << *num << ' ';
+        i = 1;
+    }
+    /**
+     * if length of number gives reminder 2
+     * when divided by 3, then print first 2 digits
+     * of that number and put space
+     * then make i equal 2 to skip these 2 digits later
+     */
+    else if (size % 3 == 2) {
+        cout << *num << *(num + 1) << ' ';
+        i = 2;
+    }
+    /**
+     * start loop from i until end of array
+     * and put space after each 3 digits
+     */
+    while (*(num + i) != '\0') {
+        if (cnt == 3) {
+            cout << ' ';
+            cnt = 0;
+        }
+        cout << *(num + i);
+        cnt++;
+        i++;
+    }
+}
+// initialize main function
+int main() {
+    char num[MAX_N];
+    cin.getline(num, MAX_N);
+    format(num, strlen(num));
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 904:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+/**
+ * this function compares 2 char arrays
+ * and returns true if they are equal
+ * or false if not
+ */
+bool equalWords(char *s1, char *s2) {
+    int i = 0;
+    while (*(s1 + i) != '\0')
+        i++;
+    int size1 = i;
+    i = 0;
+    while (*(s2 + i) != '\0')
+        i++;
+    int size2 = i;
+    if (size1 != size2)
+        return false;
+    for (i = 0; i < size1; i++)
+        if (*(s1 + i) != *(s2 + i))
+            return false;
+    return true;
+}
+/**
+ * this function checks if given word
+ * exists in given array
+ * if word doesn't exist function returns -1
+ * if it does exist it returns position in array
+ * where this word is stored
+ */
+int exists(char *arr[], char *word, int size) {
+    for (int i = 0; i < size; i++)
+        if (equalWords(arr[i], word))
+            return i;
+    return -1;
+}
+// this function turns word into uppercase
+void capitalize(char *word) {
+    for (int i = 0; *(word + i) != '\0'; i++)
+        *(word + i) = toupper(*(word + i));
+}
+void mostRecent(char *text, char *wordAns) {
+    // arr - stores all words
+    char *arr[MAX_N], delim[] = " ";
+    // current word
+    char *token = strtok(text, delim);
+    // cnt - stores how many times each word\
+    appears in the text
+    // i - number of distinct words
+    int cnt[MAX_N], i = 0, mx = 0, pos;
+    // fill cnt with zeros
+    for (int k = 0; k < MAX_N; k++)
+        cnt[k] = 0;
+    while (token) {
+        // make current word uppercase
+        capitalize(token);
+        // call function exists for currenct word\
+        and store result in index
+        int index = exists(arr, token, i);
+        // if word doesn't exist, store it in array\
+        and increase total number of words 
+        if (index == -1) {
+            arr[i] = token;
+            cnt[i] = 1;
+            i++;
+        }
+        // if word exists in array, increase number of\
+        occurances of this word
+        else
+            cnt[index]++;
+        token = strtok(NULL, delim);
+    }
+    // n will store number of distinct words
+    int n = i;
+    // find position of word which exists\
+    maximum number of times
+    for (i = 0; i < n; i++) {
+        if (cnt[i] > mx) {
+            mx = cnt[i];
+            pos = i;
+        }
+    }
+    // copy that word into result array
+    for (i = 0; *(arr[pos] + i) != '\0'; i++)
+        *(wordAns + i) = *(arr[pos] + i);
+}
+// initialize main function
+int main() {
+    char line[MAX_N], answer[MAX_N];
+    cin.getline(line, MAX_N);
+    mostRecent(line, answer);
+    cout << answer;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 905:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+// exactly the same function as in 904
+bool equalWords(char *s1, char *s2) {
+    int i = 0;
+    while (*(s1 + i) != '\0')
+        i++;
+    int size1 = i;
+    i = 0;
+    while (*(s2 + i) != '\0')
+        i++;
+    int size2 = i;
+    if (size1 != size2)
+        return false;
+    for (i = 0; i < size1; i++)
+        if (*(s1 + i) != *(s2 + i))
+            return false;
+    return true;
+}
+// also exactly the same as in 904
+int exists(char *arr[], char *word, int size) {
+    for (int i = 0; i < size; i++)
+        if (equalWords(arr[i], word))
+            return i;
+    return -1;
+}
+void deleteDuplicates(char *text) {
+    // arr - stores all distinct words
+    char *arr[MAX_N], delim[] = " ";
+    // token - current word
+    char *token = strtok(text, delim);
+    int i = 0;
+    while (token) {
+        // if current word doesn't exist\
+        insert it into array
+        if (exists(arr, token, i) == -1) {
+            arr[i] = token;
+            i++;
+        }
+        token = strtok(NULL, delim);
+    }
+    int n = i;
+    // print all words from array
+    for (i = 0; i < n; i++)
+        cout << arr[i] << ' ';
+}
+// initialize main function
+int main() {
+    char line[MAX_N];
+    cin.getline(line, MAX_N);
+    deleteDuplicates(line);
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 906:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// library for string objects
+#include <string>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+// this function is the same as 903
+void format(char *num, int size) {
+    int i = 0, cnt = 0;
+    if (size % 3 == 1) {
+        cout << *num << ' ';
+        i = 1;
+    } else if (size % 3 == 2) {
+        cout << *num << *(num + 1) << ' ';
+        i = 2;
+    }
+    while (*(num + i) != '\0') {
+        if (cnt == 3) {
+            cout << ' ';
+            cnt = 0;
+        }
+        cout << *(num + i);
+        cnt++;
+        i++;
+    }
+}
+void findNum(char *text) {
+    /**
+     * c - length of current number
+     * mx - length of longest number
+     */
+    int c = 0, mx = -1, i;
+    // longest number will be stored here
+    string num = "";
+    for (i = 0; *(text + i) != '\0'; i++) {
+        // if character is digit, increase\
+        length of current number
+        if (isdigit(*(text + i)))
+            c++;
+        else {
+            // if length of current number is\
+            greater than maximum length\
+            than store number itself in num
+            if (c > mx)  {
+                num = "";
+                mx = c;
+                for (int j = i-c; j < i; j++)
+                    num += *(text + j);
+            }
+            c = 0;
+        }
+    }
+    // this is in case input ended up with number
+    if (c > mx)  {
+        num = "";
+        mx = c;
+        for (int j = i-c; j < i; j++)
+            num += *(text + j);
+    }
+    // print number
+    format(&num[0], num.length());
+}
+// initialize main function
+int main() {
+    char text[MAX_N];
+    // input number
+    cin.getline(text, MAX_N);
+    // output longest number
+    findNum(text);
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 907:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+/**
+ * this function will compare 2 numbers
+ * and return true if first is greater
+ * than second or false otherwise
+ */
+bool firstGreater(char *a, char *b) {
+    int size1 = strlen(a), size2 = strlen(b);
+    if (size1 > size2)
+        return true;
+    if (size1 < size2)
+        return false;
+    for (int i = 0; i < size1; i++) {
+        if (*(a + i) > *(b + i))
+            return true;
+        if (*(a + i) < *(b + i))
+            return false;
+    }
+    return true;
+}
+void findMax(char *line) {
+    // arr[0] - will store maximum number
+    char *arr[3], delim[] = " ", *token = strtok(line, delim);
+    int i = 0;
+    while (token) {
+        arr[i] = token;
+        i++;
+        token = strtok(NULL, delim);
+    }
+    // compare first and second numbers
+    if (!firstGreater(arr[0], arr[1]))
+        // if second number is greater, change numbers
+        swap(arr[0], arr[1]);
+    // compare first and third numbers
+    if (!firstGreater(arr[0], arr[2]))
+        // if third number is greater, change numbers
+        swap(arr[0], arr[2]);
+    // output greatest number
+    cout << arr[0];
+}
+// initialize main function
+int main() {
+    char line[MAX_N];
+    cin.getline(line, MAX_N);
+    findMax(line);
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 908:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e4 + 1;
+/**
+ * this function takes 2 parameters
+ * which are pointers. first is pointer
+ * to char array with number and second
+ * is pointer to integer array which will store
+ * number in reverse order
+ */
+void reverseNum(char *num, int *arr) {
+    int size = strlen(num);
+    for (int i = 0; i < size; i++)
+        *(arr+i) = *(num+size-i-1)-'0';
+}
+void addVeryLongIntegers(char *num1, char *num2, char *num3) {
+    int num1_rev[MAX_N], num2_rev[MAX_N];
+    int sz1 = strlen(num1), sz2 = strlen(num2), sz3;
+    reverseNum(num1, num1_rev);
+    reverseNum(num2, num2_rev);
+    // calculate length of result number
+    if (sz1 > sz2)
+        sz3 = sz1 + 1;
+    else
+        sz3 = sz2 + 1;
+    for (int i = 0; i < sz3; i++) {
+        // add digits of 1 and 2 numbers\
+        from same position
+        num1_rev[i] += num2_rev[i];
+        // if number is greater than 10,\
+        add 1 to next place
+        num1_rev[i + 1] += (num1_rev[i] / 10);
+        // current number cannot be greater than 10
+        num1_rev[i] %= 10;
+    }
+    // if last digit is zero, than remove it
+    if (num1_rev[sz3 - 1] == 0)
+        sz3--;
+    // move result number to num3 which is result array
+    for (int i = sz3-1, j = 0; i >= 0; i--, j++)
+        *(num3+j) = num1_rev[i]+'0';
+}
+// initialize main function
+int main() {
+    char num1[MAX_N], num2[MAX_N], num3[MAX_N];
+    cin >> num1; // read 1 number
+    cin >> num2; // read 2 number
+    // add them
+    addVeryLongIntegers(num1, num2, num3);
+    cout << num3; // print result number
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 909:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e3 + 1;
+/**
+ * this function takes number and its length
+ * and returns true if is divisible by 11
+ * or false if not
+ */
+bool divisible(char *num, int size) {
+    // odd - sum of digits from odd positions
+    // even - sum of digits from even positions
+    int odd = 0, even = 0, i = 0;
+    // flag - indicates if first digit is on odd\
+    position or not
+    bool flag = (size % 2 == 0);
+    while (*(num + i) != '\0') {
+        if (flag)
+            odd += *(num + i) - '0';
+        else
+            even += *(num + i) - '0';
+        flag = !flag;
+        i++;
+    }
+    // difference between even and odd sums
+    int difference = even - odd;
+    /**
+     * if difference is less than 0, multiply
+     * it by -1 to make it positive
+     * (previously I have used function abs from cmath
+     * but unfortunately contester gave me compilation
+     * error for that)
+     */
+    if (difference < 0)
+        difference *= -1;
+    // if difference can be divided by 11\
+    without reminder, than number can be divided by 11
+    if (difference % 11 == 0)
+        return true;
+    // otherwise number cannot be divided by 11
+    return false;
+}
+// initialize main function
+int main() {
+    char num[MAX_N];
+    cin.getline(num, MAX_N);
+    /**
+     * number can be divided by 11 if difference between
+     * sum of digits on odd position and digits on even
+     * positions can be divided by 11
+     */
+    cout << (divisible(num, strlen(num)) ? "YES" : "NO");
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 910:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 1e4 + 1;
+/**
+ * this function takes 2 parameters
+ * which are pointers to char arrays
+ * function returns true if this arrays
+ * are equal and false if not
+ */
+bool equalWords(char *s1, char *s2) {
+    for (int i = 0; i < 5; i++)
+        if (*(s1 + i) != *(s2 + i))
+            return false;
+    return true;
+}
+/**
+ * this function gets pointer to
+ * first element of char array and
+ * its size
+ * function returns number of arrows
+ * in given char array
+ */
+int countArrows(char *text, int size) {
+    /** 
+     * arrow is 5 characters length
+     * so if given text if less than
+     * 5 symbols, then return 0
+     */
+    if (size < 5)
+        return 0;
+    // result - counts number of arrows
+    int result = 0;
+    /**
+     * str1 and str2 are substring that
+     * we are searching for
+     */
+    char str1[] = {">>-->\0"};
+    char str2[] = {"<--<<\0"};
+    for (int i = 4; i < size; i++) {
+        // str3 will store current substring 
+        char str3[] = {
+            *(text + i - 4),
+            *(text + i - 3),
+            *(text + i - 2),
+            *(text + i - 1),
+            *(text + i),
+            '\0'
+        };
+        /** 
+         * compare current substring with 
+         * substrings that we are searching
+         * and increase result if any of them 
+         * matches
+         */
+        result += (equalWords(str1, str3));
+        result += (equalWords(str2, str3));
+    }
+    // return number of arrows that we found
+    return result;
+}
+// initialize main function
+int main() {
+    char line[MAX_N];
+    cin.getline(line, MAX_N);
+    cout << countArrows(line, strlen(line));
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 911:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+/**
+ * this function creates one line of a chessboard
+ * it takes 3 parameters: pointer to char array,
+ * length of a line and bool variable which 
+ * tells from which symbols should line start
+ */
+void generateLine(char *line, int M, bool dot) {
+    for (int i = 0; i < M; i++) {
+        if (dot)
+            *(line + i) = '.';
+        else
+            *(line + i) = 'X';
+        dot = !dot;
+    }
+}
+/**
+ * this function makes chessboard of given
+ * width and lenghth
+ */
+void generateChessboard(int N, int M) {
+    /**
+     * if dot = true, then line starts with .
+     * if dot = false, starts with X
+     * 
+     * if number of lines is odd, then 
+     * we must start with .
+     * otherwise start with X
+     */
+    bool dot = (N % 2 == 1);
+    // this loop indicates lines
+    for (int i = 0; i < N; i++) {
+        // this array will store elements\
+        of single line
+        char *line = new char[M];
+        // call function which generates\
+        one line
+        generateLine(line, M, dot);
+        // print line
+        for (int j = 0; j < M; j++)
+            cout << *(line + j);
+        cout << endl;
+        // next line will be opposite of\
+        current line, so change dot
+        dot = !dot;
+        // delete printed line from memory
+        delete[] line;
+    }
+}
+// initialize main function
+int main() {
+    int N, M;
+    cin >> N >> M;
+    generateChessboard(N, M);
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 912:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for isalpha, tolower, toupper
+#include <cctype>
+#include <iomanip>
+// write std:: by default
+using namespace std;
+// maximum length of input
+const int MAX_N = 51;
+/**
+ * this function gets pointer to 
+ * array with given text, calculates
+ * average length of word and returns 
+ * double variable which is average length
+ */
+double avgWordLength(char *text) {
+    // letters - number of letters
+    // words - number of words
+    double letters = 0, words = 0;
+    // prev - stores previous character
+    char prev = *text;
+    for (int i = 0; *(text+i) != '\0'; i++) {
+        // check if current character is letter
+        if (isalpha(*(text+i)) != 0) {
+            letters++;
+        }
+        /**
+         * if current character is not a letter
+         * then check previous character
+         * if it was letter then increment number
+         * of words, if not then just skip it
+         */
+        else {
+            if (isalpha(prev)) {
+                words++;
+            }
+        }
+        // after all actions, change previous\
+        letter to current letter
+        prev = *(text+i);
+    }
+    // return number of letters divided by number\
+    of words
+    return double(letters/words);
+}
+// initialize main function
+int main() {
+    char text[MAX_N];
+    cin.getline(text, MAX_N);
+    // setprecision controls number of digits in\
+    fractional part
+    cout << setprecision(10) << avgWordLength(text);
+    // end of the main function
+    return 0;
+}
+

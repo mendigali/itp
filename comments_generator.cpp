@@ -44,26 +44,24 @@ string addComment(string line) {
     }
 }
 int main() {
-    ofstream answer("W08_Temir_Mendigali_SE-2019_W08.txt");
-    answer << "Week 8\n";
-    for (int i = 801; i <= 815; i++) {
-        if (i != 805) {
-            answer << "===============================\n";
-            answer << "Problem " << i << ":\n";
-            answer << "===============================\n";
-            string flname = to_string(i) + ".txt";
-            ifstream srccode(flname);
-            if (srccode.is_open()) {
-                string line;
-                while (getline(srccode, line)) {
-                    string comment = addComment(line);
-                    if (comment != "Not found") {
-                        answer << comment;
-                    }
-                    answer << line << '\n';
+    ofstream answer("W09_Temir_Mendigali_SE-2019_W09.txt");
+    answer << "Week 9\n";
+    for (int i = 901; i <= 912; i++) {
+        answer << "===============================\n";
+        answer << "Problem " << i << ":\n";
+        answer << "===============================\n";
+        string flname = "Week 9/" + to_string(i) + ".txt";
+        ifstream srccode(flname);
+        if (srccode.is_open()) {
+            string line;
+            while (getline(srccode, line)) {
+                string comment = addComment(line);
+                if (comment != "Not found") {
+                    answer << comment;
                 }
-                answer << '\n';
+                answer << line << '\n';
             }
+            answer << '\n';
         }
     }
     return 0;
