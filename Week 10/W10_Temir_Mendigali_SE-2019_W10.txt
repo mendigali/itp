@@ -1,0 +1,683 @@
+Week 10
+===============================
+Problem 1001:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1000;
+/**
+ * Declare struct train
+ */
+struct train {
+    int id;
+    char* location;
+    char* time;
+};
+/**
+ * Changes char array into 
+ * uppercase
+ */
+void caps(char* s) {
+    for (int i = 0; *(s + i); i++)
+        *(s + i) = toupper(*(s + i));
+}
+// initialize main function
+int main() {
+    // number of trains
+    int n;
+    cin >> n;
+    /**
+     * Create array of train
+     */
+    struct train* tr = new train[n];
+    for (int i = 0; i < n; i++) {
+        /**
+         * Get information about single train
+         */
+        int id;
+        char* loc = new char[MAX_N];
+        char* time = new char[MAX_N];
+        cin >> id >> loc >> time;
+        // Make location in CAPS LOCK
+        caps(loc);
+        // Store info about train into array
+        tr[i] = {id, loc, time};
+    }
+    // Get final destination
+    char dest[MAX_N];
+    cin >> dest;
+    // Make desctination in CAPS LOCK
+    caps(dest);
+    /**
+     * If this boolean variable is true
+     * than it is impossible to go to the
+     * destination. Else, it is possible.
+     */
+    bool imp = true;
+    for (int i = 0; i < n; i++) {
+        // if desctination is equal to current location
+        if (strcmp(dest, tr[i].location) == 0) {
+            // print train id, location and departure time
+            cout << tr[i].id << '_' << tr[i].location << '_' << tr[i].time;
+            // possible
+            imp = false;
+        }
+        // clear memory
+        delete[] tr[i].location;
+        delete[] tr[i].time;
+    }
+    if (imp)
+        cout << "Impossible";
+    // clear memory
+    delete[] tr;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1002:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// library for INT_MAX, INT_MIN etc
+#include <climits>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1005;
+// the same struct as 1001
+struct train {
+    int id;
+    char* location;
+    char* time;
+};
+// the same function as 1001
+void caps(char* s) {
+    for (int i = 0; *(s + i); i++)
+        *(s + i) = toupper(*(s + i));
+}
+// convert time into seconds
+int sec(char* time) {
+    int res = 0;
+    res += (*time-'0') * 600;
+    res += (*(time+1)-'0') * 60;
+    res += (*(time+3)-'0') * 10;
+    res += *(time+4)-'0';
+    return res * 60;
+}
+// initialize main function
+int main() {
+    int n;
+    cin >> n;
+    // array for trains
+    struct train* tr = new train[n];
+    // array for seconds
+    int tm[MAX_N];
+    for (int i = 0; i < n; i++) {
+        // get input
+        int id;
+        char* loc = new char[MAX_N];
+        char* time = new char[MAX_N];
+        cin >> id >> loc >> time;
+        // convert time into seconds
+        tm[i] = sec(time);
+        // uppercase location
+        caps(loc);
+        tr[i] = {id, loc, time};
+    }
+    // destination that we are finding
+    char dest[MAX_N];
+    // input destination
+    cin >> dest;
+    // uppercase destination
+    caps(dest);
+    // pos - position of minimum time
+    // mn - minimum time in seconds
+    int pos = 0, mn = INT_MAX;
+    bool imp = true;
+    for (int i = 0; i < n; i++)
+        if (strcmp(dest, tr[i].location) == 0) {
+            imp = false;
+            // find minimum time
+            if (tm[i] < mn) {
+                mn = tm[i];
+                pos = i; // position of minimum
+            }
+        }
+    if (imp)
+        cout << "Impossible";
+    else // output result train
+        cout << tr[pos].id << '_' << tr[pos].location << '_' << tr[pos].time;
+    // clear memory
+    for (int i = 0; i < n; i++) {
+        delete[] tr[i].location;
+        delete[] tr[i].time;
+    }
+    delete[] tr;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1003:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for min, max, sort
+#include <algorithm>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1e2 + 5;
+// declare struct for students
+struct Student {
+    int ID;
+    char* surname;
+    double grade;
+};
+/**
+ * Describing how to compare 2 students
+ */
+bool compStudents(Student a, Student b) {
+    /**
+     * Sort students with the same grade
+     * by student ID
+     */
+    if (a.grade == b.grade)
+        return (a.ID < b.ID);
+    // otherwise sort by grade
+    return (a.grade > b.grade);
+}
+// initialize main function
+int main() {
+    // number of students
+    int n;
+    cin >> n;
+    // create array for storing students
+    Student* student = new Student[n];
+    for (int i = 0; i < n; i++) {
+        // input students
+        char* surname = new char[MAX_N];
+        cin >> student[i].ID >> surname >> student[i].grade;
+        student[i].surname = surname;
+    }
+    // sort students
+    sort(student, student+n, compStudents);
+    /**
+     * After sorting students, first student
+     * will be with maximum grade.
+     * 
+     * Print firts student
+     */
+    cout << student[0].ID << ' '
+         << student[0].surname << ' '
+         << student[0].grade;
+    // clear memory
+    for (int i = 0; i < n; i++)
+        delete[] student[i].surname;
+    delete[] student;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1004:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for min, max, sort
+#include <algorithm>
+// write std:: by default
+using namespace std;
+// struct for students
+struct Student {
+    int ID;
+    double grade;
+};
+// compare students by grades and by id
+bool compStudents(Student a, Student b) {
+    if (a.grade == b.grade)
+        return (a.ID < b.ID);
+    return (a.grade > b.grade);
+}
+// initialize main function
+int main() {
+    // number of students
+    int n;
+    cin >> n;
+    // array of students
+    Student* student = new Student[n];
+    // input students
+    for (int i = 0; i < n; i++)
+        cin >> student[i].ID >> student[i].grade;
+    // sort students
+    sort(student, student+n, compStudents);
+    // output sorted students
+    for (int i = 0; i < n; i++)
+        cout << student[i].ID << ' ' << student[i].grade << endl;
+    // clear memory
+    delete[] student;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1005:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for INT_MAX, INT_MIN etc
+#include <climits>
+// library for min, max, sort
+#include <algorithm>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1e3 + 5;
+struct Luggage {
+	char* description;
+	int count;
+	double weight;
+};
+struct Passenger {
+	int luggageSize;
+	char* name;
+	Luggage* luggage;
+};
+/**
+ * This function gets array of luggage
+ * and returns pointer to it
+ */
+Luggage* getLuggage(int& m) {
+    Luggage* luggage = new Luggage[m];
+    for (int i = 0; i < m; i++) {
+        char* description = new char[MAX_N];
+        int count;
+        double weight;
+        cin >> description >> count >> weight;
+        luggage[i] = {description, count, weight};
+    }
+    return luggage;
+}
+// compare luggages by weight
+bool compLugg(Luggage a, Luggage b) {
+    return a.weight > b.weight;
+}
+// initialize main function
+int main() {
+    // pos number of passenger with maximum weight luggage
+    // mx maximum weight
+    int n, mx = INT_MIN, pos;
+    // number of passengers
+    cin >> n;
+    // array of passengers
+    Passenger* passenger = new Passenger[n];
+    for (int i = 0; i < n; i++) {
+        char* name = new char[MAX_N];
+        int m;
+        cin >> name >> m;
+        Luggage* luggage = new Luggage;
+        // input array of luggages
+        luggage = getLuggage(m);
+        // sort luggages of current passenger by weight
+        sort(luggage, luggage+m, compLugg);
+        passenger[i] = {m, name, luggage};
+        // find maximum weight of luggage and save number of passenger
+        if (passenger[i].luggage[0].weight > mx) {
+            mx = passenger[i].luggage[0].weight;
+            pos = i;
+        }
+    }
+    // print passanger name and luggage name
+    cout << passenger[pos].name << endl;
+    cout << passenger[pos].luggage[0].description;
+    /**
+     * Clear memory
+     */
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < passenger[i].luggageSize; j++) {
+            delete[] passenger[i].luggage[j].description;
+        }
+        delete[] passenger[i].luggage;
+        delete[] passenger[i].name;
+    }
+    delete[] passenger;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1006:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for min, max, sort
+#include <algorithm>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1e3 + 5;
+// structure of train
+struct Train {
+    int ID;
+    char* FromAddress;
+    char* ToAddress;
+    char* DepartureTime;
+};
+// compare trains by address
+bool compTrains(Train a, Train b) {
+    string s1 = a.ToAddress;
+    string s2 = b.ToAddress;
+    if(s1 > s2) return 0;
+    else return 1;  
+}
+/**
+ * Change char array to uppercase
+ */
+void caps(char* s) {
+    for (int i = 0; *(s + i); i++)
+        *(s + i) = toupper(*(s + i));
+}
+// initialize main function
+int main() {
+    // number of trains
+    int n;
+    cin >> n;
+    // array of trains
+    Train* train = new Train[n];
+    for (int i = 0; i < n; i++) {
+        // input train information
+        int ID;
+        char* FromAddress = new char[MAX_N];
+        char* ToAddress = new char[MAX_N];
+        char* DepartureTime = new char[MAX_N];
+        cin >> ID >> FromAddress >> ToAddress >> DepartureTime;
+        // change both addresses to uppercase
+        caps(FromAddress);
+        caps(ToAddress);
+        train[i] = {ID, FromAddress, ToAddress, DepartureTime};
+    }
+    // sort trains by toAddress
+    sort(train, train+n, compTrains);
+    for (int i = 0; i < n; i++) {
+        // print sorted list of trains
+        cout << train[i].ID << ' '
+             << train[i].FromAddress << ' '
+             << train[i].ToAddress << ' '
+             << train[i].DepartureTime
+             << endl;
+        // clear memory
+        delete[] train[i].FromAddress;
+        delete[] train[i].ToAddress;
+        delete[] train[i].DepartureTime;
+    }
+    // clear memory
+    delete[] train;
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1007:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for min, max, sort
+#include <algorithm>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1e4 + 5;
+struct Student {
+    int ID;
+    char* Name;
+    char* Surname;
+    int Subject1;
+    int Subject2;
+    int Subject3;
+    int SelectedSubject;
+    bool SpecialCase;
+};
+Student* get(int& n) {
+    Student* student = new Student[n];
+    for (int i = 0; i < n; i++) {
+        int ID;
+        char* Name = new char[MAX_N];
+        char* Surname = new char[MAX_N];
+        int Subject1;
+        int Subject2;
+        int Subject3;
+        int SelectedSubject;
+        string SpecialCase;
+        cin >> ID >> Name >> Surname 
+            >> Subject1 >> Subject2 >> Subject3 
+            >> SelectedSubject >> SpecialCase;
+        student[i] = {
+            ID,
+            Name,
+            Surname,
+            Subject1,
+            Subject2,
+            Subject3,
+            SelectedSubject,
+            (SpecialCase == "YES" ? true : false)
+        };
+    }
+    return student;
+}
+bool compPoints(Student a, Student b) {
+    int totalA = a.Subject1 + a.Subject2 + a.Subject3 + a.SelectedSubject;
+    int totalB = b.Subject1 + b.Subject2 + b.Subject3 + b.SelectedSubject;
+    if (totalA != totalB)
+        return (totalA > totalB);
+    if (a.SelectedSubject != b.SelectedSubject)
+        return (a.SelectedSubject > b.SelectedSubject);
+    return (a.ID < b.ID);
+}
+bool compSpecials(Student a, Student b) {
+    if (!a.SpecialCase || b.SpecialCase)
+        return false;
+    if (a.SpecialCase || !b.SpecialCase)
+        return true;
+    return (a.ID < b.ID);
+}
+void print(Student* student, int& n) {
+    for (int i = 0; i < n; i++) {
+        int total = student[i].SelectedSubject;
+        total += student[i].Subject1 + student[i].Subject2 + student[i].Subject3;
+        cout << student[i].ID << ' '
+             << student[i].Name << ' '
+             << student[i].Surname << ' '
+             << total << endl;
+    }
+}
+void clearMemory(Student* student, int& n) {
+    for (int i = 0; i < n; i++) {
+        delete[] student[i].Name;
+        delete[] student[i].Surname;
+    }
+    delete[] student;
+}
+// initialize main function
+int main() {
+    int n, m;
+    cin >> n >> m;
+    Student* student = get(n);
+    sort(student, student+n, compPoints);
+    sort(student, student+n, compSpecials);
+    sort(student, student+m, compPoints);
+    print(student, m);
+    clearMemory(student, n);
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1010:
+===============================
+// library for cin, cout
+#include <iostream>
+// library for strcmp, strlen
+#include <cstring>
+// write std:: by default
+using namespace std;
+const int MAX_N = 1e3 + 5;
+/**
+ * This function replaces every symbol 
+ * with dash(-) except num symbol
+ */
+void replaceExcept(char* s, int num) {
+    for (int i = 0; *(s + i); i++)
+        if (*(s + i) != char(num+'0'))
+            *(s + i) = '-';
+}
+/**
+ * This function counts how many
+ * times given number repeated in
+ * char array
+ */
+int countColor(char* s, int num) {
+    int cnt = 0;
+    for (int i = 0; *(s + i); i++)
+        if (*(s + i) == char(num+'0'))
+            cnt++;
+    return cnt;
+}
+// initialize main function
+int main() {
+    int black = 0; // 0
+    int white = 0; // 1
+    int red = 0; // 2
+    int green = 0; // 3
+    int i = 0;
+    // board is stored here
+    char* board[MAX_N];
+    do {
+        char* input = new char[MAX_N];
+        // get single row
+        cin >> input;
+        // if size of row is less than 2
+        // finish loop
+        if (strlen(input) < 2)
+            break;
+        /**
+         * count how many times
+         * each number repeats in single row
+         */
+        black += countColor(input, 0);
+        white += countColor(input, 1);
+        red += countColor(input, 2);
+        green += countColor(input, 3);
+        // modify row, by replacing everything
+        // except 2, with dash(-)
+        replaceExcept(input, 2);
+        board[i] = input;
+        i++;
+    } while (true);
+    // number of rows
+    int n = i;
+    // if any of this number didn't appeared,
+    // output "bad input list"
+    if (black == 0 || white == 0 || red == 0 || green == 0) {
+        cout << "BAD INPUT LIST";
+    } else {
+        // otherwise print modified board
+        for (i = 0; i < n; i++)
+            cout << board[i] << endl;
+        cout << endl;
+        // and how many times each color repeated
+        cout << black << ' ' << white << ' ' << red << ' ' << green;
+    }
+    // clear memory
+    for (i = 0; i < n; i++)
+        delete[] board[i];
+    // end of the main function
+    return 0;
+}
+
+===============================
+Problem 1011:
+===============================
+// library for cin, cout
+#include <iostream>
+// write std:: by default
+using namespace std;
+// initialize main function
+int main() {
+    char ch, t;
+    // cnt counts opening brace (
+    int cnt = 0;
+    bool ans = true;
+	while (cin >> ch) {
+        if (ans) {
+            // add opening brace
+            if (ch == '(')
+                cnt++;
+            // if first brace was closing
+            if (cnt < 1) 
+                ans = false;
+            // opening and closing braces\
+            cancel each other
+            if (ch == ')' && ans)
+                cnt--;
+        }
+	}
+    // if ans false or didn't canceled all braces
+	if (!ans || cnt != 0)
+        cout << "INVALID";
+    else
+        cout << "VALID";
+	return 0;
+}
+
+===============================
+Problem 1012:
+===============================
+#include <cstdio>
+#include <stack>
+// write std:: by default
+using namespace std;
+// initialize main function
+int main() {
+    char ch, t;
+    stack<char> st;
+    bool ans = true;
+    int n;
+    scanf("%d", &n);
+	for (int i = 0; i < n; i++) {
+        scanf(" %c", &ch);
+        if (ans) {
+            if (ch == '(' || ch == '{' || ch == '[')
+                st.push(ch);
+            if (st.empty()) 
+                ans = false;
+            if (ch == ')' && ans) {
+                t = st.top();
+                st.pop();
+                if (t == '[' || t == '{')
+                    ans = false;
+            }
+            if (ch == '}' && ans) {
+                t = st.top();
+                st.pop();
+                if (t == '(' || t == '[')
+                    ans = false;
+            }
+            if (ch == ']' && ans) {
+                t = st.top();
+                st.pop();
+                if (t == '(' || t == '{')
+                    ans = false;
+            }
+        }
+	}
+	if (!ans || !st.empty())
+        printf("No");
+    else
+        printf("Yes");
+	return 0;
+}
+

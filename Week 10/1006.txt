@@ -3,47 +3,60 @@
 #include <cstring>
 using namespace std;
 const int MAX_N = 1e3 + 5;
+// structure of train
 struct Train {
     int ID;
     char* FromAddress;
     char* ToAddress;
     char* DepartureTime;
 };
+// compare trains by address
 bool compTrains(Train a, Train b) {
     string s1 = a.ToAddress;
     string s2 = b.ToAddress;
     if(s1 > s2) return 0;
     else return 1;  
 }
+/**
+ * Change char array to uppercase
+ */
 void caps(char* s) {
     for (int i = 0; *(s + i); i++)
         *(s + i) = toupper(*(s + i));
 }
 int main() {
+    // number of trains
     int n;
     cin >> n;
+    // array of trains
     Train* train = new Train[n];
     for (int i = 0; i < n; i++) {
+        // input train information
         int ID;
         char* FromAddress = new char[MAX_N];
         char* ToAddress = new char[MAX_N];
         char* DepartureTime = new char[MAX_N];
         cin >> ID >> FromAddress >> ToAddress >> DepartureTime;
+        // change both addresses to uppercase
         caps(FromAddress);
         caps(ToAddress);
         train[i] = {ID, FromAddress, ToAddress, DepartureTime};
     }
+    // sort trains by toAddress
     sort(train, train+n, compTrains);
     for (int i = 0; i < n; i++) {
+        // print sorted list of trains
         cout << train[i].ID << ' '
              << train[i].FromAddress << ' '
              << train[i].ToAddress << ' '
              << train[i].DepartureTime
              << endl;
+        // clear memory
         delete[] train[i].FromAddress;
         delete[] train[i].ToAddress;
         delete[] train[i].DepartureTime;
     }
+    // clear memory
     delete[] train;
     return 0;
 }

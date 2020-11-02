@@ -44,13 +44,13 @@ string addComment(string line) {
     }
 }
 int main() {
-    ofstream answer("W09_Temir_Mendigali_SE-2019_W09.txt");
-    answer << "Week 9\n";
-    for (int i = 901; i <= 912; i++) {
+    ofstream answer("W10_Temir_Mendigali_SE-2019_W10.txt");
+    answer << "Week 10\n";
+    for (int i = 1001; i <= 1012; i++) {
         answer << "===============================\n";
         answer << "Problem " << i << ":\n";
         answer << "===============================\n";
-        string flname = "Week 9/" + to_string(i) + ".txt";
+        string flname = "Week 10/" + to_string(i) + ".txt";
         ifstream srccode(flname);
         if (srccode.is_open()) {
             string line;
