@@ -1,8 +1,6 @@
 #include <iostream>
-#include <climits>
 #include <algorithm>
 using namespace std;
-const int MAX_N = 1e3 + 5;
 struct Luggage {
 	char* description;
 	int count;
@@ -13,14 +11,10 @@ struct Passenger {
 	char* name;
 	Luggage* luggage;
 };
-/**
- * This function gets array of luggage
- * and returns pointer to it
- */
 Luggage* getLuggage(int& m) {
     Luggage* luggage = new Luggage[m];
     for (int i = 0; i < m; i++) {
-        char* description = new char[MAX_N];
+        char* description = new char[1001];
         int count;
         double weight;
         cin >> description >> count >> weight;
@@ -28,40 +22,28 @@ Luggage* getLuggage(int& m) {
     }
     return luggage;
 }
-// compare luggages by weight
 bool compLugg(Luggage a, Luggage b) {
     return a.weight > b.weight;
 }
 int main() {
-    // pos number of passenger with maximum weight luggage
-    // mx maximum weight
-    int n, mx = INT_MIN, pos;
-    // number of passengers
+    int n, mx = -999, pos;
     cin >> n;
-    // array of passengers
     Passenger* passenger = new Passenger[n];
     for (int i = 0; i < n; i++) {
-        char* name = new char[MAX_N];
+        char* name = new char[1001];
         int m;
         cin >> name >> m;
         Luggage* luggage = new Luggage;
-        // input array of luggages
         luggage = getLuggage(m);
-        // sort luggages of current passenger by weight
         sort(luggage, luggage+m, compLugg);
         passenger[i] = {m, name, luggage};
-        // find maximum weight of luggage and save number of passenger
         if (passenger[i].luggage[0].weight > mx) {
             mx = passenger[i].luggage[0].weight;
             pos = i;
         }
     }
-    // print passanger name and luggage name
     cout << passenger[pos].name << endl;
     cout << passenger[pos].luggage[0].description;
-    /**
-     * Clear memory
-     */
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < passenger[i].luggageSize; j++) {
             delete[] passenger[i].luggage[j].description;

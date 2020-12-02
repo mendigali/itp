@@ -1,32 +1,27 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-// struct for students
 struct Student {
     int ID;
     double grade;
 };
-// compare students by grades and by id
 bool compStudents(Student a, Student b) {
-    if (a.grade == b.grade)
+    if (a.grade == b.grade){
         return (a.ID < b.ID);
+    }
     return (a.grade > b.grade);
 }
 int main() {
-    // number of students
     int n;
     cin >> n;
-    // array of students
     Student* student = new Student[n];
-    // input students
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++){
         cin >> student[i].ID >> student[i].grade;
-    // sort students
+    }
     sort(student, student+n, compStudents);
-    // output sorted students
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++){
         cout << student[i].ID << ' ' << student[i].grade << endl;
-    // clear memory
+    }
     delete[] student;
     return 0;
 }
