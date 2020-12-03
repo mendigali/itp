@@ -1,0 +1,76 @@
+Variant 1
+Task #1
+
+Create two structs:
+
+struct Football club which has:
+- name (char*) // club name
+- footballersCount(int) // number of footballers
+- footballers(pointer to Footballers) // pointer to dynamic array of footballers
+
+struct Footballer which has: 
+- name (string) // Footballer name
+- country (char*) // country name
+
+Your task is to show all the football clubs in which the players of given country are present.
+Have to: use functions, structs, pointers and dynamic memory allocation.
+
+Input:
+n (how many clubs) [2 <= n <= 10]
+n-times: 
+	club_title
+	club_footballersCount 
+	all information about footballers
+searched_country
+
+Output:
+All clubs in which the players of given country are present
+
+Example:
+
+Input:
+3
+Manchester United
+2
+Ronaldo Portugal
+Rooney England
+Everton
+2
+Rooney England
+Barkley England
+Real Madrid
+3
+Figo Portugal
+Ronaldo Portugal
+Bale Wales
+Portugal
+
+Output:
+Manchester United
+Real Madrid
+_________________________________________________________________________________________________________________________________
+
+Task #2
+
+One of the SE students (e.g. Talgat) had a birthday yesterday. Talgat had a lot of guests on that birthday party. 
+Each guest had a name, surname, age, arrival time and time when they left the party. 
+Your task is to identify what was the maximum number of guests who were participating the party simultaneously 
+and list them in ascending order by age.
+
+Have to: use structs, functions, strings, pointers and dynamic memory allocation.
+
+Example: 
+
+Input:
+5 (total number of guests)
+Kuat Kambarov 27 12:40 15:25
+Aigul Tursinova 41 9:00 12:20
+Dias Bulatov 25 15:20 18:40
+Oleg Boyarskii 34 18:30 22:45
+Alina Smirnova 26 13:35 18:00
+
+Output:
+3
+Dias Bulatov 25 15:20 18:40
+Alina Smirnova 26 13:35 18:00
+Kuat Kambarov 27 12:40 15:25

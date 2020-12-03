@@ -12,9 +12,9 @@ struct Footbal_club
     std::string club_title;
     int club_footballersCount;
     Footballers *smth;
-};
+}; 
 
-int main()
+int main() 
 {
     int n;
     std::cout << "sum of footbal clubs: ";
