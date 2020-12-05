@@ -1,0 +1,122 @@
+Task #1 (50%)
+
+Write a program that propmpts the user to input integer N. Then accept N integers and store them in one-dimensional array. 
+Please note, that each integer is in the range [1,N-1].
+Your task is to write a function which returns the number that appears twice in the array.
+It's guaranteed that there is only one pair of numbers with the same value
+(You may use dynamic arrays, functions and pointers)
+
+Example 1
+Input
+5
+1 3 4 2 2
+
+Output
+2
+
+Example 2
+Input
+3
+1 1 2
+
+Output
+1
+_________________________________________________________________________________________________________________________________
+
+Task #2 (30%)
+
+Create two structs
+
+struct Student which has
+- ID
+- Name
+- grade
+
+struct Subject which has
+- ID
+- name
+- number of students
+- students(pointer to Students` struct)
+
+
+Your task is to show all subjects, which contains the given students in the given range of grades, sorted by grade in ascending order. 
+Have to use structs, pointers and dynamic memory allocation.
+
+Input
+n (how many subjects) [2 = n = 10]
+n-times 
+    subject id
+    subject name
+    number of students 
+    all information about students
+searched_item range(in format of xxx-yyy)
+
+Output
+All subject, which contains the given student in the given range
+Example
+
+Input
+5
+101 Physics 2
+1 Kate 100
+2 Max 50
+
+203 Economics 3
+1 Kate 30
+2 Max 70
+3 Askar 80
+
+304 C++ 2
+3 Askar 100
+1 Kate 10
+
+409 Geography 3
+1 Kate 40
+4 Lucy 90
+2 Max 86
+
+1012 Math 2
+1 Kate 90
+3 Askar 50
+
+Kate 30-80
+
+Output
+
+203 Economics
+409 Geography
+
+_________________________________________________________________________________________________________________________________
+
+Task #3 (20%)
+
+Attendance system.
+
+You are given set of attendance records. Each lesson attendance for every student is logged. 
+The task is to write a program that will identify the student (there is only one such student) with the conflict attendance time. 
+The attendance has subject, student name, arrival time and time when heshe leaves the class.
+Hint: You may have more than one student with attendance time conflict.
+You are not allowed to use strcmp function for comparing times!
+
+Have to use structs, functions, strings, pointers and dynamic memory allocation.
+
+Example 
+
+Input
+5
+Physics Amina 12:00 12:40
+Math Akzhol 13:00 13:40
+Chemistry Amina 15:20 16:00
+English Akzhol 12:10 13:10
+Math Akan 15:20 16:00
+
+Output
+Akzhol 
+
+
+5
+Physics Amina 12:00 12:40
+Math Akzhol 13:00 13:40
+Chemistry Amina 15:20 16:00
+English Akzhol 12:10 12:55
+Math Akan 15:20 16:00
